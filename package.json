@@ -4,7 +4,8 @@
   "description": "Simple server and CRUD scripts to access mongoDB database. This will simplify the access of users to data of the network of optics instruments of Radio Observatory of Jicamarca.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server" : "nodemon server.js"
   },
   "repository": {
     "type": "git",
