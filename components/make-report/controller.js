@@ -24,7 +24,20 @@ function getReports() {
   });
 }
 
+function updateReport(id, message) {
+  return new Promise(async (resolve, reject) => {
+    if (!id || !message) {
+      return reject(
+        "No se pudo actualizar el reporte, los datos estan incompletos"
+      );
+    }
+    const result = await store.updateMessage(id, message);
+    resolve(result);
+  });
+}
+
 module.exports = {
   makeReport,
   getReports,
+  updateReport,
 };

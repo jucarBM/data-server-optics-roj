@@ -37,10 +37,18 @@ async function listReports() {
   return reports;
 }
 
+async function updateMessage(id, message) {
+  //
+  const foundReport = await db.model("Reports").findOne({ _id: id });
+  foundReport.message = message;
+  foundReport.save();
+  return foundReport;
+}
+
 module.exports = {
   add: addReport,
   list: listReports,
+  updateMessage: updateMessage,
   // get
-  // update
   // delete
 };
