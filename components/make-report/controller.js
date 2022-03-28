@@ -1,14 +1,15 @@
 const store = require("./store");
 
-function makeReport(inst, message, type) {
+function makeReport(body) {
   return new Promise((resolve, reject) => {
-    if (!inst || !message || !type) {
+    if (!body.inst || !body.message || !body.type) {
       return reject("No se pudo crear el reporte, los datos estan incompletos");
     }
     const fullMessage = {
-      inst: inst,
-      message: message,
-      type: type,
+      inst: body.inst,
+      message: body.message,
+      type: body.type,
+      extra: body.extra,
       date: new Date(),
     };
 

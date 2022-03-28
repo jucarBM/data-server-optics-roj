@@ -16,7 +16,7 @@ router.get("/", function (req, res) {
 
 router.post("/", function (req, res) {
   controller
-    .makeReport(req.body.inst, req.body.message, req.body.type)
+    .makeReport(req.body)
     .then((fullMessage) => {
       response.success(req, res, fullMessage, 201);
     })
