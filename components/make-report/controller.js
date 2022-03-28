@@ -18,9 +18,9 @@ function makeReport(body) {
   });
 }
 
-function getReports() {
+function getReports(filterReports) {
   return new Promise((resolve, reject) => {
-    resolve(store.list());
+    resolve(store.list(filterReports));
   });
 }
 
@@ -36,8 +36,24 @@ function updateReport(id, message) {
   });
 }
 
+function deleteReport(id) {
+  return new Promise(async (resolve, reject) => {
+    if (!id) {
+      return reject("No se pudo eliminar el reporte, no id especificado");
+    }
+    result = await store.delete(id);
+    console.log(result);
+    if (result) {
+      resolve(result);
+    } else {
+      reject("No se pudo eliminar el reporte, id invalido o no encontrado");
+    }
+  });
+}
+
 module.exports = {
   makeReport,
   getReports,
   updateReport,
+  deleteReport,
 };

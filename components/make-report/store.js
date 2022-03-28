@@ -20,20 +20,21 @@ db.connect(uri, {
     console.error("[ERROR]: " + err);
   });
 
-const list = [];
-
-function addReport(report) {
+async function addReport(report) {
   try {
     const newReport = new Model(report);
-    newReport.save();
+    await newReport.save();
   } catch (err) {
     console.error("[ERROR]: " + err);
   }
 }
 
-async function listReports() {
-  // return list;
-  const reports = await db.model("Reports").find();
+async function listReports(filterReports) {
+  let filter = {};
+  if (filterReports !== null) {
+    filter = { inst: filterReports };
+  }
+  const reports = await db.model("Reports").find(filter);
   return reports;
 }
 
@@ -45,10 +46,21 @@ async function updateMessage(id, message) {
   return foundReport;
 }
 
+async function deleteReport(id) {
+  try {
+    const foundReport = await db.model("Reports").findOne({ _id: id });
+    if (foundReport) {
+      foundReport.remove();
+      return foundReport;
+    } else return false;
+  } catch (err) {
+    console.error("[ERROR]: " + err);
+  }
+}
+
 module.exports = {
   add: addReport,
   list: listReports,
   updateMessage: updateMessage,
-  // get
-  // delete
+  delete: deleteReport,
 };

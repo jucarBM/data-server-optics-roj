@@ -1,11 +1,13 @@
+const { Router } = require("express");
 const express = require("express");
 const response = require("../../network/response");
 const controller = require("./controller");
 router = express.Router();
 
 router.get("/", function (req, res) {
+  const filterReports = req.query.inst || null;
   controller
-    .getReports()
+    .getReports(filterReports)
     .then((reportList) => {
       response.success(req, res, reportList, 200);
     })
@@ -36,6 +38,17 @@ router.patch("/:id", function (req, res) {
       response.error(req, res, "Error actualizando el reporte", 500, err);
     });
   //
+});
+
+router.delete("/:id", function (req, res) {
+  controller
+    .deleteReport(req.params.id)
+    .then(() => {
+      response.success(req, res, `Usuario ${req.params.id} eliminado.`, 200);
+    })
+    .catch((err) => {
+      response.error(req, res, "id invalido", 500, err);
+    });
 });
 
 module.exports = router;
