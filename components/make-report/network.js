@@ -28,7 +28,6 @@ router.post("/", function (req, res) {
 });
 
 router.patch("/:id", function (req, res) {
-  console.log(req.params.id);
   controller
     .updateReport(req.params.id, req.body.message)
     .then((data) => {

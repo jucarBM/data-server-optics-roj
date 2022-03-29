@@ -42,7 +42,6 @@ function deleteReport(id) {
       return reject("No se pudo eliminar el reporte, no id especificado");
     }
     result = await store.delete(id);
-    console.log(result);
     if (result) {
       resolve(result);
     } else {
