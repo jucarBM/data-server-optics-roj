@@ -7,7 +7,7 @@ async function connectDB(uri) {
       useUnifiedTopology: true,
     })
     .then(() => {
-      console.log("Connected to database");
+      console.log("[db] Connected to database");
     })
     .catch((err) => {
       console.error("[ERROR]: " + err);
