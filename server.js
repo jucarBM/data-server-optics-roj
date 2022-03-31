@@ -1,10 +1,13 @@
 require("dotenv").config();
 const express = require("express");
+var app = express();
+const server = require("http").Server(app);
+
 const router = require("./network/routes");
 const db = require("./db");
+const socket = require("./socket");
 
 // Start app server
-var app = express();
 app.use(express.json());
 
 // connect db
@@ -20,10 +23,12 @@ db.connectDB(uri);
 
 // use router
 router(app);
+socket.connect(server);
 
 // Public folder
 app.use(express.static("public"));
 
 // open port
-app.listen(3000);
-console.log("Listening on port 3000");
+server.listen(3000, () => {
+  console.log("Listening on port 3000");
+});
