@@ -3,12 +3,14 @@ const express = require("express");
 var app = express();
 const server = require("http").Server(app);
 
+const cors = require("cors");
 const router = require("./network/routes");
 const db = require("./db");
 const socket = require("./socket");
 
 // Start app server
 app.use(express.json());
+app.use(cors());
 
 // connect db
 const uri =
